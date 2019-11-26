@@ -82,6 +82,7 @@ order by DealDescription desc";
         $name = $row['StockItemName'];
         $price = $row['UnitPrice'];
         $korting = $row ['DealDescription'];
+        $id = $row ['stockitemid'];
         print("<li><div class='cta'><a href=\"\">" . $name . " </a></div><br><h3> €" . $price . "</h3><br><h2>" . $korting . "</h2><br> <div class='addtocard'><a href=\"\">Aan winkelmandje toevoegen</a></div></li>");
     }
 }
