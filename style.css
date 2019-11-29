@@ -162,6 +162,7 @@
     opacity: 0.7;
     cursor: pointer;
 }
+.listen
 
 
 .cta a {
@@ -218,4 +219,71 @@
 }
 .aboutUs{
     margin-left: 15%;
+}
+
+.information a{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.6);
+    border-radius: 5px;
+}
+
+.buy{
+    position: absolute;
+    text-align: center;
+    width: 170px;
+    padding: 0;
+    background-color: #0090e3;
+    height: 40px;
+    margin-top: 200px;
+    margin-left: 140px;
+}
+
+.buy:hover{
+    opacity: 0.7;
+    cursor: pointer;
+}
+
+.buy a {
+    text-decoration: none;
+    color: white;
+    background-color: #0090e3;
+    top: 10px;
+    position: relative;
+}
+.buy button {
+    text-decoration: none;
+    color: white;
+    background-color: #0090e3;
+    top: 10px;
+    position: relative;
+}
+.info li {
+    padding-bottom:  80px;
+}
+
+.info {
+    text-decoration: none;
+    float: left;
+    padding-top: 60px;
+}
+
+.info ul {
+    list-style: none;
+    display: inline-block
+}
+
+.errors {;
+    padding-left: 250px;
+}
+
+.errors a {
+    text-decoration: none;
+    color: #0090e3;
+    display: block;
+    padding-top: 350px;
+}
+
+.errors a h2 {
+    -webkit-text-stroke-width: 0.5px;
+    -webkit-text-stroke-color: black;
+    margin-left: 240px;
 }

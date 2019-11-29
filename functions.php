@@ -3,7 +3,7 @@ include("database_connection.php");
 
 
 
-//deze function laat alle stockgroepen zien
+//these functions will show our stockgroups
 function get_stockGroups()
 {
 
@@ -40,28 +40,7 @@ function get_stockGroupshomepage()
 
 }
 
-/*laat temperatuur in celcius en fahrenheit zien
-function temperatuur()
-{
-    include ("database_connection.php");
-//sql queery dit is op een specifiek product, het moet worden aangepast
-    $sql = "select * from stockitems s join coldroomtemperatures_archive c on S.StockItemID = c.ColdRoomTemperatureID where s.IsChillerStock = 1 and s.StockItemID = 220";
-    $link = mysqli_connect('localhost', 'root', '', 'wideworldimporters');
-
-//resultaat van de queery
-    $result = mysqli_query($link, $sql);
-
-//result in celcius en fahrenheit
-    while ($uitkomst = mysqli_fetch_array($result)) {
-        {
-            echo round($uitkomst["Temperature"]) . " Celcius";
-            echo round($uitkomst["Temperature"] * 1.8 + 32) . " Fahrenheit \n";
-        }
-    }
-}
-*/
-
-
+//these functions will check the products in our database
 function get_products_specialdeals(){
     global $database;
     $sql = "select s.StockItemName,s.stockitemid, s.SearchDetails, s.UnitPrice, d.DealDescription 
@@ -366,6 +345,151 @@ group by stockitemid
         $name = $row['StockItemName'];
         $price = $row['UnitPrice'];
         print("<li><div class='cta'><a href=\"\">" . $name . " </a></div><br><h3> €" . $price . "</h3><br><div class='addtocard'><a href=\"\">Aan winkelmandje toevoegen</a></div></li>");
+    }
+}
+
+//these functions will check if they didn't enter their information
+function firstname_correct()
+{
+    if (isset($_POST["firstname"])) {
+        $firstname = $_POST['firstname'];
+        print $firstname;
+    }
+}
+
+function lastname_correct()
+{
+    if (isset($_POST["lastname"])) {
+        $lastname = $_POST['lastname'];
+        print ($lastname);
+    }
+}
+
+function mail_correct()
+{
+    if (isset($_POST["mail"])) {
+        $mail = $_POST['mail'];
+        print ($mail);
+    }
+}
+
+
+function adress_correct()
+{
+    if (isset($_POST["adress"])) {
+        $adress = $_POST['adress'];
+        print ($adress);
+    }
+}
+
+function district_correct()
+{
+    if (isset($_POST["district"])) {
+        $district = $_POST['district'];
+        print ($district);
+    }
+}
+
+function postalcode_correct()
+{
+    if (isset($_POST["postalcode"])) {
+        $postalcode = $_POST['postalcode'];
+        print ($postalcode);
+    }
+}
+
+function phone_correct()
+{
+    if (isset($_POST["phone"])) {
+        $phone = $_POST['phone'];
+        print ($phone);
+    }
+}
+
+//this function go to payment site
+function gotoheader(){
+    header('location: ../WWI_ICTM1G2/examples/payments/create-ideal-payment.php');
+}
+
+//first part of information.php
+function firstpart(){
+    if (isset($_POST["bestellen"])) {
+
+        if (!isset($_POST['firstname']) || $_POST['firstname']=="") {
+
+
+        } elseif (!isset($_POST['lastname']) || $_POST['lastname']=="") {
+
+
+        } elseif (!isset($_POST['mail']) || $_POST['mail']=="") {
+
+
+        } elseif (!isset($_POST['adress']) || $_POST['adress']=="") {
+
+
+        } elseif (!isset($_POST['district']) || $_POST['district']=="") {
+
+
+        } elseif (!isset($_POST['postalcode']) || $_POST['postalcode']=="") {
+
+
+        } elseif (!isset($_POST['phone']) || $_POST['phone']=="") {
+
+
+        } else {
+
+            //everything becomes a variable
+            $name = $_POST['firstname'] . " " . $_POST['lastname'];
+            $mail = $_POST['mail'];
+            $adress = $_POST['adress'];
+            $district = $_POST['district'];
+            $postalcode = $_POST['postalcode'];
+            $phone = $_POST['phone'];
+
+            $link = mysqli_connect("localhost", "root", "", "wideworldimporters");
+
+            // Check connection
+            if($link === false){
+                die("ERROR: Could not connect. " . mysqli_connect_error());
+            }
+
+            $sql = "INSERT INTO customers_archive (CustomerName, Mail, PhoneNumber, DeliveryAddressLine2, PostalAddressLine2, DeliveryPostalCode) VALUES ('$name', '$mail', '$phone', '$adress', '$district', '$postalcode')";
+            if(mysqli_query($link, $sql)){
+                gotoheader();
+
+            } else{
+                echo "Er is helaas iets fout gegaan, probeer het opnieuw. " . mysqli_error($link);
+            }
+        }
+    }
+}
+
+//last part of information.php
+function lastpart(){
+    if (isset($_POST["bestellen"])) {
+
+        if (!isset($_POST['firstname']) || $_POST['firstname']=="") {
+            print("<div class='errors'><a><h2>u heeft niet alle gegevens ingevuld</h2></a></div>");
+
+        } elseif (!isset($_POST['lastname']) || $_POST['lastname']=="") {
+            print("<div class='errors'><a><h2>u heeft niet alle gegevens ingevuld</h2></a></div>");
+
+        } elseif (!isset($_POST['mail']) || $_POST['mail']=="") {
+            print("<div class='errors'><a><h2>u heeft niet alle gegevens ingevuld</h2></a></div>");
+
+        } elseif (!isset($_POST['adress']) || $_POST['adress']=="") {
+            print("<div class='errors'><a><h2>u heeft niet alle gegevens ingevuld</h2></a></div>");
+
+        } elseif (!isset($_POST['district']) || $_POST['district']=="") {
+            print("<div class='errors'><a><h2>u heeft niet alle gegevens ingevuld</h2></a></div>");
+
+        } elseif (!isset($_POST['postalcode']) || $_POST['postalcode']=="") {
+            print("<div class='errors'><a><h2>u heeft niet alle gegevens ingevuld</h2></a></div>");
+
+        } elseif (!isset($_POST['phone']) || $_POST['phone']=="") {
+            print("<div class='errors'><a><h2>u heeft niet alle gegevens ingevuld</h2></a></div>");
+
+        }
     }
 }
 ?>
